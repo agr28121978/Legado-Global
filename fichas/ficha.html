@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Ficha Deportista</title>
+    <style>
+        :root {
+            --bg: url("images/backgrounds/fondo-aros.jpg");
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: Inter, system-ui, Segoe UI, Roboto;
+        }
+
+        body {
+            background: var(--bg) center/cover no-repeat fixed;
+            color: #111;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 48px auto;
+            background: rgba(255, 255, 255, .92);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            gap: 18px;
+            box-shadow: 0 12px 36px rgba(0, 0, 0, .18);
+        }
+
+        .left {
+            width: 320px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-start;
+        }
+
+        .left .photo {
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            height: 320px;
+            background: #eee;
+        }
+
+        .left .name {
+            font-size: 22px;
+            font-weight: 800;
+            margin-top: 6px;
+        }
+
+        .left .meta {
+            font-size: 14px;
+            color: #444;
+        }
+
+        .right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .card-section {
+            background: rgba(255, 255, 255, .98);
+            padding: 14px;
+            border-radius: 8px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, .06);
+        }
+
+        .back-btn {
+            position: fixed;
+            left: 16px;
+            top: 16px;
+            padding: 8px 10px;
+            background: rgba(0, 0, 0, .6);
+            color: #fff;
+            border-radius: 8px;
+            text-decoration: none;
+            z-index: 80;
+        }
+    </style>
+</head>
+
+<body>
+    <a class="back-btn" href="index.html" aria-label="Volver">⬅ Volver</a>
+
+    <div class="container" id="container">
+        <div class="left">
+            <div class="photo" id="photo"><!-- imagen #nombre#2.jpg --></div>
+            <div class="name" id="name">Nombre Deportista</div>
+            <div class="meta" id="meta">Fecha de nacimiento · País</div>
+        </div>
+        <div class="right">
+            <div class="card-section" id="meritos">
+                <h3>Méritos</h3>
+                <p>Lista de logros, medallas, records, etc.</p>
+            </div>
+            <div class="card-section" id="legado">
+                <h3>Legado</h3>
+                <p>Texto sobre el impacto, influencia y legado del deportista.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function qs(name) { const p = new URLSearchParams(location.search); return p.get(name); }
+        const id = qs('id') || '0';
+        const isES = id && id.startsWith('ES');
+        const idx = isES ? id.replace('ES', '') : id;
+
+        // En producción: carga datos reales desde JSON/DB. Aquí plantilla demo:
+        const demo = {
+            name: isES ? `Español ${idx}` : `Deportista ${idx}`,
+            photo: `images/cards/#nombre#${isES ? idx : idx}2.jpg`, // por convención: #nombre#2.jpg en el pie de ficha
+            meta: isES ? `Nac: 01/01/1990 · España` : `Nac: 01/01/1990 · País X`,
+            meritos: `<ul><li>Medalla de oro en X</li><li>Campeón en Y</li></ul>`,
+            legado: `<p>Figura influyente en su disciplina; ejemplo para nuevas generaciones.</p>`
+        };
+
+        document.getElementById('name').textContent = demo.name;
+        const photoDiv = document.getElementById('photo');
+        photoDiv.innerHTML = `<img src="${demo.photo}" alt="${demo.name}" style="width:100%;height:100%;object-fit:cover">`;
+        document.getElementById('meta').textContent = demo.meta;
+        document.getElementById('meritos').innerHTML = `<h3>Méritos</h3>${demo.meritos}`;
+        document.getElementById('legado').innerHTML = `<h3>Legado</h3>${demo.legado}`;
+    </script>
+</body>
+
+</html>
