@@ -1,60 +1,814 @@
-const fs = require("fs");
-const path = require("path");
-
-const CARDS_DIR = path.join(__dirname,
-"images/cards");
-const out = { deportistas: []
-};
-
-const files = fs.readdirSync(CARDS_DIR);
-
-const map = {};
-files.forEach(fname => {
-  const ext = path.extname(fname).toLowerCase();
-  if (![
-        ".jpg",
-        ".jpeg",
-        ".png"
-    ].includes(ext)) return;
-  const name = path.basename(fname, ext);
-  if (name.endsWith("1")) {
-    const base = name.slice(0,
-        -1);
-    map[base
-        ] = map[base
-        ] || {};
-    map[base
-        ].foto1 = path.join("images/cards", fname).replace(/\\/g,
-        "/");
-    } else if (name.endsWith("2")) {
-    const base = name.slice(0,
-        -1);
-    map[base
-        ] = map[base
-        ] || {};
-    map[base
-        ].foto2 = path.join("images/cards", fname).replace(/\\/g,
-        "/");
+{
+  "deportistas": [
+    {
+      "id": 1,
+      "nombre": "Muhammad Ali",
+      "deporte": "Boxeo",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/MuhammadAli1.jpg",
+      "foto2": "images/cards/MuhammadAli2.jpg",
+      "ficha": "fichas/MuhammadAli.html"
+    },
+    {
+      "id": 2,
+      "nombre": "Pelé",
+      "deporte": "Fútbol",
+      "pais": "Brasil",
+      "foto1": "images/cards/Pele1.jpg",
+      "foto2": "images/cards/Pele2.jpg",
+      "ficha": "fichas/Pele.html"
+    },
+    {
+      "id": 3,
+      "nombre": "Diego Maradona",
+      "deporte": "Fútbol",
+      "pais": "Argentina",
+      "foto1": "images/cards/DiegoMaradona1.jpg",
+      "foto2": "images/cards/DiegoMaradona2.jpg",
+      "ficha": "fichas/DiegoMaradona.html"
+    },
+    {
+      "id": 4,
+      "nombre": "Michael Jordan",
+      "deporte": "Baloncesto",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/MichaelJordan1.jpg",
+      "foto2": "images/cards/MichaelJordan2.jpg",
+      "ficha": "fichas/MichaelJordan.html"
+    },
+    {
+      "id": 5,
+      "nombre": "Usain Bolt",
+      "deporte": "Atletismo",
+      "pais": "Jamaica",
+      "foto1": "images/cards/UsainBolt1.jpg",
+      "foto2": "images/cards/UsainBolt2.jpg",
+      "ficha": "fichas/UsainBolt.html"
+    },
+    {
+      "id": 6,
+      "nombre": "Serena Williams",
+      "deporte": "Tenis",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/SerenaWilliams1.jpg",
+      "foto2": "images/cards/SerenaWilliams2.jpg",
+      "ficha": "fichas/SerenaWilliams.html"
+    },
+    {
+      "id": 7,
+      "nombre": "Lionel Messi",
+      "deporte": "Fútbol",
+      "pais": "Argentina",
+      "foto1": "images/cards/LionelMessi1.jpg",
+      "foto2": "images/cards/LionelMessi2.jpg",
+      "ficha": "fichas/LionelMessi.html"
+    },
+    {
+      "id": 8,
+      "nombre": "Cristiano Ronaldo",
+      "deporte": "Fútbol",
+      "pais": "Portugal",
+      "foto1": "images/cards/CristianoRonaldo1.jpg",
+      "foto2": "images/cards/CristianoRonaldo2.jpg",
+      "ficha": "fichas/CristianoRonaldo.html"
+    },
+    {
+      "id": 9,
+      "nombre": "Roger Federer",
+      "deporte": "Tenis",
+      "pais": "Suiza",
+      "foto1": "images/cards/RogerFederer1.jpg",
+      "foto2": "images/cards/RogerFederer2.jpg",
+      "ficha": "fichas/RogerFederer.html"
+    },
+    {
+      "id": 10,
+      "nombre": "Rafael Nadal",
+      "deporte": "Tenis",
+      "pais": "España",
+      "foto1": "images/cards/RafaelNadal1.jpg",
+      "foto2": "images/cards/RafaelNadal2.jpg",
+      "ficha": "fichas/RafaelNadal.html"
+    },
+    {
+      "id": 11,
+      "nombre": "Tiger Woods",
+      "deporte": "Golf",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/TigerWoods1.jpg",
+      "foto2": "images/cards/TigerWoods2.jpg",
+      "ficha": "fichas/TigerWoods.html"
+    },
+    {
+      "id": 12,
+      "nombre": "Simone Biles",
+      "deporte": "Gimnasia",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/SimoneBiles1.jpg",
+      "foto2": "images/cards/SimoneBiles2.jpg",
+      "ficha": "fichas/SimoneBiles.html"
+    },
+    {
+      "id": 13,
+      "nombre": "Michael Phelps",
+      "deporte": "Natación",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/MichaelPhelps1.jpg",
+      "foto2": "images/cards/MichaelPhelps2.jpg",
+      "ficha": "fichas/MichaelPhelps.html"
+    },
+    {
+      "id": 14,
+      "nombre": "Kobe Bryant",
+      "deporte": "Baloncesto",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/KobeBryant1.jpg",
+      "foto2": "images/cards/KobeBryant2.jpg",
+      "ficha": "fichas/KobeBryant.html"
+    },
+    {
+      "id": 15,
+      "nombre": "Zinedine Zidane",
+      "deporte": "Fútbol",
+      "pais": "Francia",
+      "foto1": "images/cards/ZinedineZidane1.jpg",
+      "foto2": "images/cards/ZinedineZidane2.jpg",
+      "ficha": "fichas/ZinedineZidane.html"
+    },
+    {
+      "id": 16,
+      "nombre": "Nadia Comăneci",
+      "deporte": "Gimnasia",
+      "pais": "Rumanía",
+      "foto1": "images/cards/NadiaC omaneci1.jpg",
+      "foto2": "images/cards/NadiaC omaneci2.jpg",
+      "ficha": "fichas/NadiaC omaneci.html"
+    },
+    {
+      "id": 17,
+      "nombre": "Carl Lewis",
+      "deporte": "Atletismo",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/CarlLewis1.jpg",
+      "foto2": "images/cards/CarlLewis2.jpg",
+      "ficha": "fichas/CarlLewis.html"
+    },
+    {
+      "id": 18,
+      "nombre": "Jesse Owens",
+      "deporte": "Atletismo",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/JesseOwens1.jpg",
+      "foto2": "images/cards/JesseOwens2.jpg",
+      "ficha": "fichas/JesseOwens.html"
+    },
+    {
+      "id": 19,
+      "nombre": "Ayrton Senna",
+      "deporte": "Fórmula 1",
+      "pais": "Brasil",
+      "foto1": "images/cards/AyrtonSenna1.jpg",
+      "foto2": "images/cards/AyrtonSenna2.jpg",
+      "ficha": "fichas/AyrtonSenna.html"
+    },
+    {
+      "id": 20,
+      "nombre": "Michael Schumacher",
+      "deporte": "Fórmula 1",
+      "pais": "Alemania",
+      "foto1": "images/cards/MichaelSchumacher1.jpg",
+      "foto2": "images/cards/MichaelSchumacher2.jpg",
+      "ficha": "fichas/MichaelSchumacher.html"
+    },
+    {
+      "id": 21,
+      "nombre": "Babe Ruth",
+      "deporte": "Béisbol",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/BabeRuth1.jpg",
+      "foto2": "images/cards/BabeRuth2.jpg",
+      "ficha": "fichas/BabeRuth.html"
+    },
+    {
+      "id": 22,
+      "nombre": "Jackie Robinson",
+      "deporte": "Béisbol",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/JackieRobinson1.jpg",
+      "foto2": "images/cards/JackieRobinson2.jpg",
+      "ficha": "fichas/JackieRobinson.html"
+    },
+    {
+      "id": 23,
+      "nombre": "Wayne Gretzky",
+      "deporte": "Hockey sobre hielo",
+      "pais": "Canadá",
+      "foto1": "images/cards/WayneGretzky1.jpg",
+      "foto2": "images/cards/WayneGretzky2.jpg",
+      "ficha": "fichas/WayneGretzky.html"
+    },
+    {
+      "id": 24,
+      "nombre": "Ronaldinho",
+      "deporte": "Fútbol",
+      "pais": "Brasil",
+      "foto1": "images/cards/Ronaldinho1.jpg",
+      "foto2": "images/cards/Ronaldinho2.jpg",
+      "ficha": "fichas/Ronaldinho.html"
+    },
+    {
+      "id": 25,
+      "nombre": "Ronaldo Nazário",
+      "deporte": "Fútbol",
+      "pais": "Brasil",
+      "foto1": "images/cards/RonaldoNazario1.jpg",
+      "foto2": "images/cards/RonaldoNazario2.jpg",
+      "ficha": "fichas/RonaldoNazario.html"
+    },
+    {
+      "id": 26,
+      "nombre": "Johan Cruyff",
+      "deporte": "Fútbol",
+      "pais": "Países Bajos",
+      "foto1": "images/cards/JohanCruyff1.jpg",
+      "foto2": "images/cards/JohanCruyff2.jpg",
+      "ficha": "fichas/JohanCruyff.html"
+    },
+    {
+      "id": 27,
+      "nombre": "Franz Beckenbauer",
+      "deporte": "Fútbol",
+      "pais": "Alemania",
+      "foto1": "images/cards/FranzBeckenbauer1.jpg",
+      "foto2": "images/cards/FranzBeckenbauer2.jpg",
+      "ficha": "fichas/FranzBeckenbauer.html"
+    },
+    {
+      "id": 28,
+      "nombre": "Alfredo Di Stéfano",
+      "deporte": "Fútbol",
+      "pais": "Argentina/España",
+      "foto1": "images/cards/AlfredoDiStefano1.jpg",
+      "foto2": "images/cards/AlfredoDiStefano2.jpg",
+      "ficha": "fichas/AlfredoDiStefano.html"
+    },
+    {
+      "id": 29,
+      "nombre": "Garrincha",
+      "deporte": "Fútbol",
+      "pais": "Brasil",
+      "foto1": "images/cards/Garrincha1.jpg",
+      "foto2": "images/cards/Garrincha2.jpg",
+      "ficha": "fichas/Garrincha.html"
+    },
+    {
+      "id": 30,
+      "nombre": "George Best",
+      "deporte": "Fútbol",
+      "pais": "Irlanda del Norte",
+      "foto1": "images/cards/GeorgeBest1.jpg",
+      "foto2": "images/cards/GeorgeBest2.jpg",
+      "ficha": "fichas/GeorgeBest.html"
+    },
+    {
+      "id": 31,
+      "nombre": "Lev Yashin",
+      "deporte": "Fútbol",
+      "pais": "Unión Soviética",
+      "foto1": "images/cards/LevYashin1.jpg",
+      "foto2": "images/cards/LevYashin2.jpg",
+      "ficha": "fichas/LevYashin.html"
+    },
+    {
+      "id": 32,
+      "nombre": "Bobby Charlton",
+      "deporte": "Fútbol",
+      "pais": "Inglaterra",
+      "foto1": "images/cards/BobbyCharlton1.jpg",
+      "foto2": "images/cards/BobbyCharlton2.jpg",
+      "ficha": "fichas/BobbyCharlton.html"
+    },
+    {
+      "id": 33,
+      "nombre": "Michel Platini",
+      "deporte": "Fútbol",
+      "pais": "Francia",
+      "foto1": "images/cards/MichelPlatini1.jpg",
+      "foto2": "images/cards/MichelPlatini2.jpg",
+      "ficha": "fichas/MichelPlatini.html"
+    },
+    {
+      "id": 34,
+      "nombre": "Eusebio",
+      "deporte": "Fútbol",
+      "pais": "Portugal",
+      "foto1": "images/cards/Eusebio1.jpg",
+      "foto2": "images/cards/Eusebio2.jpg",
+      "ficha": "fichas/Eusebio.html"
+    },
+    {
+      "id": 35,
+      "nombre": "Romario",
+      "deporte": "Fútbol",
+      "pais": "Brasil",
+      "foto1": "images/cards/Romario1.jpg",
+      "foto2": "images/cards/Romario2.jpg",
+      "ficha": "fichas/Romario.html"
+    },
+    {
+      "id": 36,
+      "nombre": "Paolo Maldini",
+      "deporte": "Fútbol",
+      "pais": "Italia",
+      "foto1": "images/cards/PaoloMaldini1.jpg",
+      "foto2": "images/cards/PaoloMaldini2.jpg",
+      "ficha": "fichas/PaoloMaldini.html"
+    },
+    {
+      "id": 37,
+      "nombre": "Marco van Basten",
+      "deporte": "Fútbol",
+      "pais": "Países Bajos",
+      "foto1": "images/cards/MarcoVanBasten1.jpg",
+      "foto2": "images/cards/MarcoVanBasten2.jpg",
+      "ficha": "fichas/MarcoVanBasten.html"
+    },
+    {
+      "id": 38,
+      "nombre": "Roberto Baggio",
+      "deporte": "Fútbol",
+      "pais": "Italia",
+      "foto1": "images/cards/RobertoBaggio1.jpg",
+      "foto2": "images/cards/RobertoBaggio2.jpg",
+      "ficha": "fichas/RobertoBaggio.html"
+    },
+    {
+      "id": 39,
+      "nombre": "Gerd Müller",
+      "deporte": "Fútbol",
+      "pais": "Alemania",
+      "foto1": "images/cards/GerdMuller1.jpg",
+      "foto2": "images/cards/GerdMuller2.jpg",
+      "ficha": "fichas/GerdMuller.html"
+    },
+    {
+      "id": 40,
+      "nombre": "Lothar Matthäus",
+      "deporte": "Fútbol",
+      "pais": "Alemania",
+      "foto1": "images/cards/LotharMatthaus1.jpg",
+      "foto2": "images/cards/LotharMatthaus2.jpg",
+      "ficha": "fichas/LotharMatthaus.html"
+    },
+    {
+      "id": 41,
+      "nombre": "Magic Johnson",
+      "deporte": "Baloncesto",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/MagicJohnson1.jpg",
+      "foto2": "images/cards/MagicJohnson2.jpg",
+      "ficha": "fichas/MagicJohnson.html"
+    },
+    {
+      "id": 42,
+      "nombre": "Larry Bird",
+      "deporte": "Baloncesto",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/LarryBird1.jpg",
+      "foto2": "images/cards/LarryBird2.jpg",
+      "ficha": "fichas/LarryBird.html"
+    },
+    {
+      "id": 43,
+      "nombre": "LeBron James",
+      "deporte": "Baloncesto",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/LeBronJames1.jpg",
+      "foto2": "images/cards/LeBronJames2.jpg",
+      "ficha": "fichas/LeBronJames.html"
+    },
+    {
+      "id": 44,
+      "nombre": "Kareem Abdul-Jabbar",
+      "deporte": "Baloncesto",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/KareemAbdulJabbar1.jpg",
+      "foto2": "images/cards/KareemAbdulJabbar2.jpg",
+      "ficha": "fichas/KareemAbdulJabbar.html"
+    },
+    {
+      "id": 45,
+      "nombre": "Wilt Chamberlain",
+      "deporte": "Baloncesto",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/WiltChamberlain1.jpg",
+      "foto2": "images/cards/WiltChamberlain2.jpg",
+      "ficha": "fichas/WiltChamberlain.html"
+    },
+    {
+      "id": 46,
+      "nombre": "Bill Russell",
+      "deporte": "Baloncesto",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/BillRussell1.jpg",
+      "foto2": "images/cards/BillRussell2.jpg",
+      "ficha": "fichas/BillRussell.html"
+    },
+    {
+      "id": 47,
+      "nombre": "Novak Djokovic",
+      "deporte": "Tenis",
+      "pais": "Serbia",
+      "foto1": "images/cards/NovakDjokovic1.jpg",
+      "foto2": "images/cards/NovakDjokovic2.jpg",
+      "ficha": "fichas/NovakDjokovic.html"
+    },
+    {
+      "id": 48,
+      "nombre": "Pete Sampras",
+      "deporte": "Tenis",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/PeteSampras1.jpg",
+      "foto2": "images/cards/PeteSampras2.jpg",
+      "ficha": "fichas/PeteSampras.html"
+    },
+    {
+      "id": 49,
+      "nombre": "Björn Borg",
+      "deporte": "Tenis",
+      "pais": "Suecia",
+      "foto1": "images/cards/BjornBorg1.jpg",
+      "foto2": "images/cards/BjornBorg2.jpg",
+      "ficha": "fichas/BjornBorg.html"
+    },
+    {
+      "id": 50,
+      "nombre": "Steffi Graf",
+      "deporte": "Tenis",
+      "pais": "Alemania",
+      "foto1": "images/cards/SteffiGraf1.jpg",
+      "foto2": "images/cards/SteffiGraf2.jpg",
+      "ficha": "fichas/SteffiGraf.html"
+    },
+    {
+      "id": 51,
+      "nombre": "Martina Navratilova",
+      "deporte": "Tenis",
+      "pais": "Estados Unidos/Checoslovaquia",
+      "foto1": "images/cards/MartinaNavratilova1.jpg",
+      "foto2": "images/cards/MartinaNavratilova2.jpg",
+      "ficha": "fichas/MartinaNavratilova.html"
+    },
+    {
+      "id": 52,
+      "nombre": "Rod Laver",
+      "deporte": "Tenis",
+      "pais": "Australia",
+      "foto1": "images/cards/RodLaver1.jpg",
+      "foto2": "images/cards/RodLaver2.jpg",
+      "ficha": "fichas/RodLaver.html"
+    },
+    {
+      "id": 53,
+      "nombre": "Jim Brown",
+      "deporte": "Fútbol Americano",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/JimBrown1.jpg",
+      "foto2": "images/cards/JimBrown2.jpg",
+      "ficha": "fichas/JimBrown.html"
+    },
+    {
+      "id": 54,
+      "nombre": "Joe Montana",
+      "deporte": "Fútbol Americano",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/JoeMontana1.jpg",
+      "foto2": "images/cards/JoeMontana2.jpg",
+      "ficha": "fichas/JoeMontana.html"
+    },
+    {
+      "id": 55,
+      "nombre": "Tom Brady",
+      "deporte": "Fútbol Americano",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/TomBrady1.jpg",
+      "foto2": "images/cards/TomBrady2.jpg",
+      "ficha": "fichas/TomBrady.html"
+    },
+    {
+      "id": 56,
+      "nombre": "Jerry Rice",
+      "deporte": "Fútbol Americano",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/JerryRice1.jpg",
+      "foto2": "images/cards/JerryRice2.jpg",
+      "ficha": "fichas/JerryRice.html"
+    },
+    {
+      "id": 57,
+      "nombre": "Joe Louis",
+      "deporte": "Boxeo",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/JoeLouis1.jpg",
+      "foto2": "images/cards/JoeLouis2.jpg",
+      "ficha": "fichas/JoeLouis.html"
+    },
+    {
+      "id": 58,
+      "nombre": "Sugar Ray Robinson",
+      "deporte": "Boxeo",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/SugarRayRobinson1.jpg",
+      "foto2": "images/cards/SugarRayRobinson2.jpg",
+      "ficha": "fichas/SugarRayRobinson.html"
+    },
+    {
+      "id": 59,
+      "nombre": "Rocky Marciano",
+      "deporte": "Boxeo",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/RockyMarciano1.jpg",
+      "foto2": "images/cards/RockyMarciano2.jpg",
+      "ficha": "fichas/RockyMarciano.html"
+    },
+    {
+      "id": 60,
+      "nombre": "Mike Tyson",
+      "deporte": "Boxeo",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/MikeTyson1.jpg",
+      "foto2": "images/cards/MikeTyson2.jpg",
+      "ficha": "fichas/MikeTyson.html"
+    },
+    {
+      "id": 61,
+      "nombre": "Floyd Mayweather Jr.",
+      "deporte": "Boxeo",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/FloydMayweather1.jpg",
+      "foto2": "images/cards/FloydMayweather2.jpg",
+      "ficha": "fichas/FloydMayweather.html"
+    },
+    {
+      "id": 62,
+      "nombre": "Manny Pacquiao",
+      "deporte": "Boxeo",
+      "pais": "Filipinas",
+      "foto1": "images/cards/MannyPacquiao1.jpg",
+      "foto2": "images/cards/MannyPacquiao2.jpg",
+      "ficha": "fichas/MannyPacquiao.html"
+    },
+    {
+      "id": 63,
+      "nombre": "Mark Spitz",
+      "deporte": "Natación",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/MarkSpitz1.jpg",
+      "foto2": "images/cards/MarkSpitz2.jpg",
+      "ficha": "fichas/MarkSpitz.html"
+    },
+    {
+      "id": 64,
+      "nombre": "Katie Ledecky",
+      "deporte": "Natación",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/KatieLedecky1.jpg",
+      "foto2": "images/cards/KatieLedecky2.jpg",
+      "ficha": "fichas/KatieLedecky.html"
+    },
+    {
+      "id": 65,
+      "nombre": "Paavo Nurmi",
+      "deporte": "Atletismo",
+      "pais": "Finlandia",
+      "foto1": "images/cards/PaavoNurmi1.jpg",
+      "foto2": "images/cards/PaavoNurmi2.jpg",
+      "ficha": "fichas/PaavoNurmi.html"
+    },
+    {
+      "id": 66,
+      "nombre": "Haile Gebrselassie",
+      "deporte": "Atletismo",
+      "pais": "Etiopía",
+      "foto1": "images/cards/HaileGebrselassie1.jpg",
+      "foto2": "images/cards/HaileGebrselassie2.jpg",
+      "ficha": "fichas/HaileGebrselassie.html"
+    },
+    {
+      "id": 67,
+      "nombre": "Jackie Joyner-Kersee",
+      "deporte": "Atletismo",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/JackieJoynerKersee1.jpg",
+      "foto2": "images/cards/JackieJoynerKersee2.jpg",
+      "ficha": "fichas/JackieJoynerKersee.html"
+    },
+    {
+      "id": 68,
+      "nombre": "Valentino Rossi",
+      "deporte": "MotoGP",
+      "pais": "Italia",
+      "foto1": "images/cards/ValentinoRossi1.jpg",
+      "foto2": "images/cards/ValentinoRossi2.jpg",
+      "ficha": "fichas/ValentinoRossi.html"
+    },
+    {
+      "id": 69,
+      "nombre": "Marc Márquez",
+      "deporte": "MotoGP",
+      "pais": "España",
+      "foto1": "images/cards/MarcMarquez1.jpg",
+      "foto2": "images/cards/MarcMarquez2.jpg",
+      "ficha": "fichas/MarcMarquez.html"
+    },
+    {
+      "id": 70,
+      "nombre": "Lewis Hamilton",
+      "deporte": "Fórmula 1",
+      "pais": "Reino Unido",
+      "foto1": "images/cards/LewisHamilton1.jpg",
+      "foto2": "images/cards/LewisHamilton2.jpg",
+      "ficha": "fichas/LewisHamilton.html"
+    },
+    {
+      "id": 71,
+      "nombre": "Sebastian Vettel",
+      "deporte": "Fórmula 1",
+      "pais": "Alemania",
+      "foto1": "images/cards/SebastianVettel1.jpg",
+      "foto2": "images/cards/SebastianVettel2.jpg",
+      "ficha": "fichas/SebastianVettel.html"
+    },
+    {
+      "id": 72,
+      "nombre": "Alain Prost",
+      "deporte": "Fórmula 1",
+      "pais": "Francia",
+      "foto1": "images/cards/AlainProst1.jpg",
+      "foto2": "images/cards/AlainProst2.jpg",
+      "ficha": "fichas/AlainProst.html"
+    },
+    {
+      "id": 73,
+      "nombre": "Jack Nicklaus",
+      "deporte": "Golf",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/JackNicklaus1.jpg",
+      "foto2": "images/cards/JackNicklaus2.jpg",
+      "ficha": "fichas/JackNicklaus.html"
+    },
+    {
+      "id": 74,
+      "nombre": "Arnold Palmer",
+      "deporte": "Golf",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/ArnoldPalmer1.jpg",
+      "foto2": "images/cards/ArnoldPalmer2.jpg",
+      "ficha": "fichas/ArnoldPalmer.html"
+    },
+    {
+      "id": 75,
+      "nombre": "Phil Mickelson",
+      "deporte": "Golf",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/PhilMickelson1.jpg",
+      "foto2": "images/cards/PhilMickelson2.jpg",
+      "ficha": "fichas/PhilMickelson.html"
+    },
+    {
+      "id": 76,
+      "nombre": "Olga Korbut",
+      "deporte": "Gimnasia",
+      "pais": "Unión Soviética",
+      "foto1": "images/cards/OlgaKorbut1.jpg",
+      "foto2": "images/cards/OlgaKorbut2.jpg",
+      "ficha": "fichas/OlgaKorbut.html"
+    },
+    {
+      "id": 77,
+      "nombre": "Larisa Latynina",
+      "deporte": "Gimnasia",
+      "pais": "Unión Soviética",
+      "foto1": "images/cards/LarisaLatynina1.jpg",
+      "foto2": "images/cards/LarisaLatynina2.jpg",
+      "ficha": "fichas/LarisaLatynina.html"
+    },
+    {
+      "id": 78,
+      "nombre": "Neymar Jr.",
+      "deporte": "Fútbol",
+      "pais": "Brasil",
+      "foto1": "images/cards/NeymarJr1.jpg",
+      "foto2": "images/cards/NeymarJr2.jpg",
+      "ficha": "fichas/NeymarJr.html"
+    },
+    {
+      "id": 79,
+      "nombre": "Kylian Mbappé",
+      "deporte": "Fútbol",
+      "pais": "Francia",
+      "foto1": "images/cards/KylianMbappe1.jpg",
+      "foto2": "images/cards/KylianMbappe2.jpg",
+      "ficha": "fichas/KylianMbappe.html"
+    },
+    {
+      "id": 80,
+      "nombre": "Xavi Hernández",
+      "deporte": "Fútbol",
+      "pais": "España",
+      "foto1": "images/cards/XaviHernandez1.jpg",
+      "foto2": "images/cards/XaviHernandez2.jpg",
+      "ficha": "fichas/XaviHernandez.html"
+    },
+    {
+      "id": 81,
+      "nombre": "Andrés Iniesta",
+      "deporte": "Fútbol",
+      "pais": "España",
+      "foto1": "images/cards/AndresIniesta1.jpg",
+      "foto2": "images/cards/AndresIniesta2.jpg",
+      "ficha": "fichas/AndresIniesta.html"
+    },
+    {
+      "id": 82,
+      "nombre": "Thierry Henry",
+      "deporte": "Fútbol",
+      "pais": "Francia",
+      "foto1": "images/cards/ThierryHenry1.jpg",
+      "foto2": "images/cards/ThierryHenry2.jpg",
+      "ficha": "fichas/ThierryHenry.html"
+    },
+    {
+      "id": 83,
+      "nombre": "Alessandro Del Piero",
+      "deporte": "Fútbol",
+      "pais": "Italia",
+      "foto1": "images/cards/AlessandroDelPiero1.jpg",
+      "foto2": "images/cards/AlessandroDelPiero2.jpg",
+      "ficha": "fichas/AlessandroDelPiero.html"
+    },
+    {
+      "id": 84,
+      "nombre": "Ruud Gullit",
+      "deporte": "Fútbol",
+      "pais": "Países Bajos",
+      "foto1": "images/cards/RuudGullit1.jpg",
+      "foto2": "images/cards/RuudGullit2.jpg",
+      "ficha": "fichas/RuudGullit.html"
+    },
+    {
+      "id": 85,
+      "nombre": "David Beckham",
+      "deporte": "Fútbol",
+      "pais": "Inglaterra",
+      "foto1": "images/cards/DavidBeckham1.jpg",
+      "foto2": "images/cards/DavidBeckham2.jpg",
+      "ficha": "fichas/DavidBeckham.html"
+    },
+    {
+      "id": 86,
+      "nombre": "Fernando Alonso",
+      "deporte": "Fórmula 1",
+      "pais": "España",
+      "foto1": "images/cards/FernandoAlonso1.jpg",
+      "foto2": "images/cards/FernandoAlonso2.jpg",
+      "ficha": "fichas/FernandoAlonso.html"
+    },
+    {
+      "id": 87,
+      "nombre": "Niki Lauda",
+      "deporte": "Fórmula 1",
+      "pais": "Austria",
+      "foto1": "images/cards/NikiLauda1.jpg",
+      "foto2": "images/cards/NikiLauda2.jpg",
+      "ficha": "fichas/NikiLauda.html"
+    },
+    {
+      "id": 88,
+      "nombre": "Juan Manuel Fangio",
+      "deporte": "Fórmula 1",
+      "pais": "Argentina",
+      "foto1": "images/cards/JuanManuelFangio1.jpg",
+      "foto2": "images/cards/JuanManuelFangio2.jpg",
+      "ficha": "fichas/JuanManuelFangio.html"
+    },
+    {
+      "id": 89,
+      "nombre": "Shaquille O'Neal",
+      "deporte": "Baloncesto",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/ShaquilleONeal1.jpg",
+      "foto2": "images/cards/ShaquilleONeal2.jpg",
+      "ficha": "fichas/ShaquilleONeal.html"
+    },
+    {
+      "id": 90,
+      "nombre": "Babe Didrikson Zaharias",
+      "deporte": "Multideporte",
+      "pais": "Estados Unidos",
+      "foto1": "images/cards/BabeDidriksonZaharias1.jpg",
+      "foto2": "images/cards/BabeDidriksonZaharias2.jpg",
+      "ficha": "fichas/BabeDidriksonZaharias.html"
     }
-});
-
-let id = 1;
-for (const base of Object.keys(map).sort()) {
-  out.deportistas.push({
-    id: id++,
-    nombre: base,
-    foto1: map[base
-        ].foto1,
-    foto2: map[base
-        ].foto2,
-    ficha: `fichas/${base
-        }.html`
-    });
+  ]
 }
-
-fs.writeFileSync("deportistas.json", JSON.stringify(out,
-null,
-2),
-"utf8");
-console.log("deportistas.json generado:", out.deportistas.length,
-"entradas");
