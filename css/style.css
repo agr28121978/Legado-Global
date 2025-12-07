@@ -1,5 +1,138 @@
 :root {
   /* Colores Olímpicos */
+  .scene-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  perspective: 1600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url("./images/backgrounds/fondo1.jpg") center/cover fixed no-repeat;
+}
+
+/* Contenedor 3D tipo escalera de caracol */
+.spiral-staircase {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  height: 80vh;
+  transform-style: preserve-3d;
+  transition: filter 0.4s ease, opacity 0.4s ease;
+}
+
+/* Carta básica */
+.card-item {
+  position: absolute;
+  width: 180px;
+  height: 260px;
+  transform-style: preserve-3d;
+  transform-origin: center bottom;
+  cursor: pointer;
+  transition:
+    transform 0.5s ease,
+    box-shadow 0.4s ease,
+    z-index 0.4s ease;
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  backface-visibility: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+}
+
+.card-face img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Estado: carta inclinada 90º hacia fuera al pasar por ella */
+.card-item.tilted {
+  transform: translate3d(var(--x), var(--y), var(--z)) rotateY(var(--ry)) rotateX(-90deg);
+  box-shadow: 0 20px 45px rgba(0,0,0,0.8);
+}
+
+/* Mostrar nombre debajo cuando está inclinada */
+.card-item::after {
+  content: attr(data-nombre);
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  margin-top: 8px;
+  padding: 3px 8px;
+  font-size: 0.75rem;
+  color: #fff;
+  background: rgba(0,0,0,0.8);
+  border-radius: 999px;
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.card-item.tilted::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Capa para ficha ampliada (60% pantalla) */
+.card-detail-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 40;
+}
+
+.card-detail-modal.active {
+  display: flex;
+}
+
+.card-detail-content {
+  width: 60vw;
+  max-width: 960px;
+  height: 70vh;
+  background: rgba(0,0,0,0.92);
+  border-radius: 18px;
+  box-shadow: 0 25px 80px rgba(0,0,0,0.9);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Iframe que contiene la ficha del deportista */
+#cardDetailFrame {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Botón cerrar ficha */
+.btn-close-detail {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  border: none;
+  background: rgba(0,0,0,0.7);
+  color: #fff;
+  font-size: 1.5rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Cuando hay ficha ampliada, el carrusel y el fondo se vuelven más transparentes */
+body.detail-open .spiral-staircase {
+  filter: blur(2px) brightness(0.5);
+  opacity: 0.5;
+}
+
   .card3d {
   position: absolute;
   width: 150px;
@@ -20,3 +153,4 @@
   z-index: 9999;
   transition: transform 1s cubic-bezier(.3,1.6,.3,1);
 }
+
