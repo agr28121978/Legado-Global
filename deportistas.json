@@ -1,0 +1,60 @@
+const fs = require("fs");
+const path = require("path");
+
+const CARDS_DIR = path.join(__dirname,
+"images/cards");
+const out = { deportistas: []
+};
+
+const files = fs.readdirSync(CARDS_DIR);
+
+const map = {};
+files.forEach(fname => {
+  const ext = path.extname(fname).toLowerCase();
+  if (![
+        ".jpg",
+        ".jpeg",
+        ".png"
+    ].includes(ext)) return;
+  const name = path.basename(fname, ext);
+  if (name.endsWith("1")) {
+    const base = name.slice(0,
+        -1);
+    map[base
+        ] = map[base
+        ] || {};
+    map[base
+        ].foto1 = path.join("images/cards", fname).replace(/\\/g,
+        "/");
+    } else if (name.endsWith("2")) {
+    const base = name.slice(0,
+        -1);
+    map[base
+        ] = map[base
+        ] || {};
+    map[base
+        ].foto2 = path.join("images/cards", fname).replace(/\\/g,
+        "/");
+    }
+});
+
+let id = 1;
+for (const base of Object.keys(map).sort()) {
+  out.deportistas.push({
+    id: id++,
+    nombre: base,
+    foto1: map[base
+        ].foto1,
+    foto2: map[base
+        ].foto2,
+    ficha: `fichas/${base
+        }.html`
+    });
+}
+
+fs.writeFileSync("deportistas.json", JSON.stringify(out,
+null,
+2),
+"utf8");
+console.log("deportistas.json generado:", out.deportistas.length,
+"entradas");

@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Deportistas Españoles</title>
+    <style>
+        :root {
+            --bg: url("images/backgrounds/fondo2.jpg");
+            --card-w: 140px;
+            --card-h: 190px;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto;
+        }
+
+        body {
+            background: var(--bg) center/cover no-repeat fixed;
+            overflow: auto;
+        }
+
+        .header {
+            position: fixed;
+            top: 12px;
+            left: 12px;
+            z-index: 80;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 8px 12px;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, .6);
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* Stage */
+        .stage {
+            min-height: 100vh;
+            padding-top: 90px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            position: relative;
+        }
+
+        .spiral {
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        /* Card */
+        .card {
+            position: absolute;
+            width: var(--card-w);
+            height: var(--card-h);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, .25);
+            cursor: pointer;
+        }
+
+        .card img {
+            width: 100%;
+            height: 70%;
+            object-fit: cover;
+        }
+
+        .card .name {
+            padding: 8px;
+            font-weight: 700;
+            text-align: center;
+            background: linear-gradient(180deg, transparent, rgba(0, 0, 0, .12));
+            color: #fff;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer {
+            position: fixed;
+            right: 12px;
+            bottom: 12px;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, .85);
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header"><a class="back-btn" href="index.html" aria-label="Volver al carrusel principal">⬅ Volver al
+            carrusel principal</a></div>
+
+    <main class="stage">
+        <div id="spiral" class="spiral"></div>
+    </main>
+
+    <footer>Deportistas Españoles — Formato espiral</footer>
+
+    <script>
+        const M = 24; // ajustar según cuántos atletas españoles tengas
+        const spiral = document.getElementById('spiral');
+
+        for (let i = 1; i <= M; i++) {
+            const c = document.createElement('div'); c.className = 'card';
+            const img = document.createElement('img');
+            img.src = `images/cards/#nombre#${i}.jpg`; // sustituye por fotos españolas reales o por rutas concretas
+            img.alt = `Español ${i}`;
+            const name = document.createElement('div'); name.className = 'name'; name.textContent = `Español ${i}`;
+            c.appendChild(img); c.appendChild(name);
+            c.addEventListener('click', () => location.href = `ficha.html?id=ES${i}`);
+            spiral.appendChild(c);
+        }
+
+        // layout simple en espiral descendente
+        function layout() {
+            const cards = Array.from(document.querySelectorAll('.card'));
+            const a = 15;
+            for (let i = 0; i < cards.length; i++) {
+                const angle = i * 0.5;
+                const radius = a * Math.sqrt(i + 1) + 8;
+                const x = radius * Math.cos(angle);
+                const y = radius * Math.sin(angle) + i * 4;
+                cards[i].style.left = (x) + 'px';
+                cards[i].style.top = (y) + 'px';
+            }
+        }
+        layout();
+        window.addEventListener('resize', layout);
+    </script>
+</body>
+
+</html>
