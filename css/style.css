@@ -1,2 +1,22 @@
 :root {
   /* Colores Olímpicos */
+  .card3d {
+  position: absolute;
+  width: 150px;
+  height: 200px;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(.3,.9,.3,1);
+  cursor: pointer;
+}
+
+.card3d img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  backface-visibility: hidden;
+}
+
+.card3d.volando {
+  z-index: 9999;
+  transition: transform 1s cubic-bezier(.3,1.6,.3,1);
+}
